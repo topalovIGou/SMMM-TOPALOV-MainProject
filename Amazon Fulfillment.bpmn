@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
-  <process id="znes_bud_393" name="Дозвіл на знесення аварійних будівель" isExecutable="true">
-    <documentation>Смоктій К.В.  Последние правки: 09.02.2017</documentation>
+  <process id="znes_bud_393" name="Дозвіл на отримання дозволу на порушення об’єктів благоустрою" isExecutable="true">
+    <documentation>Топалов М.А. Последние правки: 11.06.2017</documentation>
     <startEvent id="startevent1" name="Start">
       <extensionElements>
         <activiti:formProperty id="sID_Public_SubjectOrganJoin" name="Оберіть свій район або місто" type="select" default="0" required="true"></activiti:formProperty>
@@ -13,8 +13,15 @@
         <activiti:formProperty id="bankId_scan_passport" name="сканована копія паспорту;завантажте одним файлом формату pdf або архівом zip" type="file" default=" " required="true"></activiti:formProperty>
         <activiti:formProperty id="bankIdinn" name="ІПН" type="string" required="true"></activiti:formProperty>
         <activiti:formProperty id="bankId_scan_inn" name="сканована копія ІПН" type="file" required="true"></activiti:formProperty>
-        <activiti:formProperty id="sAdressBuilding" name="Адреса будівлі щодо якої запрошується дозвіл на знесення" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="sAdressBuilding" name="Адреса будівлі щодо якої запрошується дозвіл на порушення об’єктів благоустрою" type="string" required="true"></activiti:formProperty>
         <activiti:formProperty id="fSvidoztvoNaPravoSobstvennosti" name="Завантажте свідоцтво про право власності на будинок" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="zEnterTheFOPInfo" name="Вказати дані підприємства або ФОП" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="sTimeForTheProject" name="Вказати термін проведення робіт" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="sPositionOnWhichWillWork" name="Вказати де плануються вести роботи" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="sCauseOfWork" name="Вказати мету проведення робіт" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="sNatureOfWork" name="Вказати характер робіт (згідно з проектом)" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="wCopyOfTheWorkingDraft" name="Завантажте скановані копії робочого проекту або проекту виробничих робіт (план-схема місця проведення робіт у разі проведення аварійних робіт)" type="file" required="true"></activiti:formProperty>
+        <activiti:formProperty id="wTrafficManagementSchemes" name="Завантажте скановані копії схеми організації дорожнього руху та тимчасової схеми об`їзду з урахуванням маршрутів руху транспорту та пішоходів, погоджену з Державтоінспекцією (якщо потрібно)." type="file" required="true"></activiti:formProperty>
         <activiti:formProperty id="email" name="E-Mail адреса для зворотнього зв'язку" type="string" required="true"></activiti:formProperty>
         <activiti:formProperty id="phone" name="Контактний (особистий) номер телефону для зворотнього зв'язку" type="string" default="+380" required="true"></activiti:formProperty>
         <activiti:formProperty id="sNameOrgan" name="Центр надання адмінпослуг" type="invisible"></activiti:formProperty>
@@ -25,7 +32,7 @@
         <activiti:formProperty id="sShapka_spend_meeting_404" name="Керівнику якого робочого органу" type="invisible"></activiti:formProperty>
         <activiti:formProperty id="date_today" name="Дата подачі заяви" type="invisible"></activiti:formProperty>
         <activiti:formProperty id="sID_UA" name="sID_UA" type="invisible"></activiti:formProperty>
-        <activiti:formProperty id="markers1" name="Розкриття атрібутів" type="markers" default="${markerService.loadFromFile('skv/skv_znes_bud_393_1.json')}"></activiti:formProperty>
+        <activiti:formProperty id="markers1" name="Розкриття атрібутів" type="markers" default="${markerService.loadFromFile('/load-form.json')}"></activiti:formProperty>
       </extensionElements>
     </startEvent>
     <serviceTask id="servicetask1" name="Завантаження файлів" activiti:delegateExpression="#{fileTaskUpload}"></serviceTask>
@@ -45,7 +52,7 @@
         <activiti:formProperty id="bankIdinn" name="ІПН" type="string" writable="false"></activiti:formProperty>
         <activiti:formProperty id="email" name="E-Mail адреса для зворотнього зв'язку" type="string" writable="false"></activiti:formProperty>
         <activiti:formProperty id="phone" name="Контактний (особистий) номер телефону для зворотнього зв'язку" type="string" writable="false"></activiti:formProperty>
-        <activiti:formProperty id="sAdressBuilding" name="Адреса будівлі  щодо якої запрошується дозвіл на знесення" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="sAdressBuilding" name="Адреса будівлі  щодо якої запрошується дозвіл на порушення об’єктів благоустрою" type="string" writable="false"></activiti:formProperty>
         <activiti:formProperty id="decision_1" name="Прийняте рішення щодо розгляду надання дозволу" type="enum" required="true">
           <activiti:value id="accept" name="розглянути дозвіл"></activiti:value>
           <activiti:value id="reject" name="відмовити у розгляданні дозволу"></activiti:value>
@@ -71,13 +78,13 @@
         <activiti:formProperty id="bankIdinn" name="ІПН" type="string" writable="false"></activiti:formProperty>
         <activiti:formProperty id="email" name="E-Mail адреса для зворотнього зв'язку" type="string" writable="false"></activiti:formProperty>
         <activiti:formProperty id="phone" name="Контактний (особистий) номер телефону для зворотнього зв'язку" type="string" writable="false"></activiti:formProperty>
-        <activiti:formProperty id="sAdressBuilding" name="Адреса будівлі  щодо якої запрошується дозвіл на знесення" type="string" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="sAdressBuilding" name="Адреса будівлі  щодо якої запрошується дозвіл на порушення об’єктів благоустрою" type="string" writable="false"></activiti:formProperty>
         <activiti:formProperty id="decision_2" name="Прийняте рішення щодо надання дозволу" type="enum" required="true">
           <activiti:value id="accept" name="надати дозвіл"></activiti:value>
           <activiti:value id="reject" name="відмовити у видачі дозволу"></activiti:value>
         </activiti:formProperty>
         <activiti:formProperty id="comment_2" name="У разі відмови внесіть, будь ласка, коментар" type="textArea"></activiti:formProperty>
-        <activiti:formProperty id="sBody_1" name="[pattern/print/znes_bud_393_print.html]" type="invisible" default="Заява на надання дозволу на знесення будівлі" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="sBody_1" name="[pattern/print/znes_bud_393_print.html]" type="invisible" default="Заява на надання дозволу на порушення об’єктів благоустрою" writable="false"></activiti:formProperty>
         <activiti:formProperty id="sMailClerk" name="пошта оргструктури (району)" type="invisible"></activiti:formProperty>
         <activiti:formProperty id="sAddress" name="адрес оргструктури (району)" type="invisible"></activiti:formProperty>
         <activiti:formProperty id="sPhoneOrgan" name="телефон для довідки оргструктури (району)" type="invisible"></activiti:formProperty>
@@ -99,7 +106,7 @@
           <activiti:string><![CDATA[noreply@igov.org.ua]]></activiti:string>
         </activiti:field>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[Нове звернення на тему: Дозвіл на знесення аварійних будівель]]></activiti:string>
+          <activiti:string><![CDATA[Нове звернення на тему: Дозвіл на порушення об’єктів благоустрою]]></activiti:string>
         </activiti:field>
         <activiti:field name="text">
           <activiti:expression><![CDATA[[pattern/mail/_common_header.html]
@@ -135,7 +142,7 @@ ${sNameOrgan}<br />
           <activiti:string><![CDATA[noreply@igov.org.ua]]></activiti:string>
         </activiti:field>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[Нове звернення на тему: Дозвіл на знесення аварійних будівель]]></activiti:string>
+          <activiti:string><![CDATA[Нове звернення на тему: Дозвіл на порушення об’єктів благоустрою]]></activiti:string>
         </activiti:field>
         <activiti:field name="text">
           <activiti:expression><![CDATA[[pattern/mail/_common_employee_notify.html]]]></activiti:expression>
@@ -157,7 +164,7 @@ ${sNameOrgan}<br />
     <serviceTask id="servicetask3" name="Повідомлення громадянина про розгляд звернення + СМС" activiti:delegateExpression="#{MailTaskWithAttachmentsAndSMS}">
       <extensionElements>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[Перевірено звернення на тему: Дозвіл на знесення аварійних будівель]]></activiti:string>
+          <activiti:string><![CDATA[Перевірено звернення на тему: Дозвіл на порушення об’єктів благоустрою]]></activiti:string>
         </activiti:field>
         <activiti:field name="to">
           <activiti:expression><![CDATA[${email}]]></activiti:expression>
@@ -168,7 +175,7 @@ ${sNameOrgan}<br />
         <activiti:field name="text">
           <activiti:expression><![CDATA[[pattern/mail/_common_header.html]
 <b>Шановний(-а) ${bankIdfirstName} ${bankIdmiddleName}.</b><br /><br />
-Ваше звернення [sID_Order] щодо Дозвіл на знесення аварійних будівель успішно перевірено і буде опрацьовано впродовж визначений Законом термін.<br />
+Ваше звернення [sID_Order] щодо Дозвіл на порушення об’єктів благоустрою успішно перевірено і буде опрацьовано впродовж визначений Законом термін.<br />
 Ви отримаєте додаткове повідомлення за результатами розгляду звернення.<br />
 ${sNameOrgan}<br />
 ${sAddress}<br />
@@ -199,14 +206,13 @@ ${sNameOrgan}<br />
           <activiti:string><![CDATA[noreply@igov.org.ua]]></activiti:string>
         </activiti:field>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[Відхилено звернення на тему: Дозвіл на знесення аварійних будівель]]></activiti:string>
+          <activiti:string><![CDATA[Відхилено звернення на тему: Дозвіл на порушення об’єктів благоустрою]]></activiti:string>
         </activiti:field>
         <activiti:field name="text">
           <activiti:expression><![CDATA[[pattern/mail/_common_header.html]
 <b>Шановний(-а) ${bankIdfirstName} ${bankIdmiddleName}.</b><br /><br />
-На жаль, змушені відмовити Вам у наданні послуги щодо Дозвіл на знесення аварійних будівель (звернення [sID_Order]).<br /> 
+На жаль, змушені відмовити Вам у наданні послуги щодо Дозвіл на порушення об’єктів благоустрою (звернення [sID_Order]).<br /> 
 Підстава: ${comment_1}.<br />
-Звертаємо увагу, Ви можете заповнити заявку повторно на порталі <a href="https://igov.org.ua/" target="_blank">iGov.org.ua</a><br />
 ${sNameOrgan}<br />
 ${sAddress}<br />
 ${sWorkTime}<br />
@@ -228,7 +234,7 @@ ${sNameOrgan}<br />
         </activiti:field>
       </extensionElements>
     </serviceTask>
-    <serviceTask id="servicetask5" name="Повідомлення про отримання дозволу на знесення аварійних будівель + СМС" activiti:delegateExpression="#{MailTaskWithAttachmentsAndSMS}">
+    <serviceTask id="servicetask5" name="Повідомлення про отримання дозволу на порушення об’єктів благоустрою + СМС" activiti:delegateExpression="#{MailTaskWithAttachmentsAndSMS}">
       <extensionElements>
         <activiti:field name="to">
           <activiti:expression><![CDATA[${email}]]></activiti:expression>
@@ -237,12 +243,12 @@ ${sNameOrgan}<br />
           <activiti:string><![CDATA[noreply@igov.org.ua]]></activiti:string>
         </activiti:field>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[Опрацьовано звернення на тему: Дозвіл на знесення аварійних будівель]]></activiti:string>
+          <activiti:string><![CDATA[Опрацьовано звернення на тему: Дозвіл на порушення об’єктів благоустрою]]></activiti:string>
         </activiti:field>
         <activiti:field name="text">
           <activiti:expression><![CDATA[[pattern/mail/_common_header.html]
 <b>Шановний(-а) ${bankIdfirstName} ${bankIdmiddleName}.</b><br /><br />
-Ваше звернення [sID_Order] успішно розглянуто та оформлено відповідний дозвіл на знесення аварійних будівель. Зверніться особисто до сільської ради з оригіналом паспорту, щоб отримати відповідний документ.
+Ваше звернення [sID_Order] успішно розглянуто та оформлено відповідний дозвіл на отримання дозволу на порушення об’єктів благоустрою.
 <br /> 
 ${sNameOrgan}<br />
 ${sWorkTime}<br />
@@ -275,7 +281,7 @@ ${sNameOrgan}<br />
           <activiti:string><![CDATA[noreply@igov.org.ua]]></activiti:string>
         </activiti:field>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[Відхилено звернення на тему: Дозвіл на знесення аварійних будівель]]></activiti:string>
+          <activiti:string><![CDATA[Відхилено звернення на тему: Дозвіл на порушення об’єктів благоустрою]]></activiti:string>
         </activiti:field>
         <activiti:field name="text">
           <activiti:expression><![CDATA[[pattern/mail/_common_header.html]
